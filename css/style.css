@@ -101,3 +101,11 @@ main {
     padding: 8px;
     margin-top: 16px;
 }
+
+.d-none {
+    display: none;
+}
+
+.timer {
+    margin-top: 20px;
+}
