@@ -1,22 +1,20 @@
 const numberContainer = document.querySelector('.number-container');
-const numberBox = document.querySelectorAll('.number-box');
-const Boxtimer = document.querySelector('.timer');
+
 
 const randomNumberArr = []; //array dove mi salvo i 5 numeri random generati
 
 
-// genero in pagina i 5 numeri casuali
+// genero e scrivo in pagina i 5 numeri casuali
 for (let i = 0; i < 5; i++) {
 
     const randomNumber = getRandomNumber(1, 100);
     console.log(randomNumber);
+    randomNumberArr.push(randomNumber);
 
     const numberBox = document.createElement('div');
     numberBox.innerHTML = randomNumber;
     numberBox.classList.add('number-box');
-    numberContainer.append(numberBox);
-
-    randomNumberArr.push(randomNumber);
+    numberContainer.append(numberBox); 
 
 }
 
@@ -40,13 +38,17 @@ let timer = setInterval(function() {
 // dopo 30 secondi nascondo i numeri e chiedo l'input all'utente
 setTimeout (function() {
 
-    numberContainer.classList.add('d-none');
+    const Boxtimer = document.querySelector('.timer');
+    
+    numberContainer.innerHTML = '';
+    // numberContainer.classList.add('d-none');
     Boxtimer.classList.add('d-none');
 
     setTimeout (function() {
+
         userInputArr = []; //array per salvare gli input dell'utente
 
-        // utilizzo un ciclo for per chiedere all'utente i 5 numeri
+        // utilizzo un ciclo for per chiedere all'utente i 5 numeri e salvarli in un array
         for (let i = 1; i <= 5; i++) {
             userInputNumber = parseInt(prompt(`inserisci il ${i}° numero:`));
             userInputArr.push(userInputNumber);
@@ -58,13 +60,14 @@ setTimeout (function() {
         const rightNumbersArr = []; //mi salvo in un array i numeri indovinati
 
         for (let i = 0; i < randomNumberArr.length; i++) {
+            
             if (randomNumberArr[i] == userInputArr[i]) {
                 counter++;
                 rightNumbersArr.push(userInputArr[i]);
             }
         }
 
-        alert(`hai indovinato ${counter} numeri`);
+        alert(`hai indovinato ${counter} numeri: ` + rightNumbersArr);
         
     },1000);
 
